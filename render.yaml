@@ -1,10 +1,9 @@
 services:
   - type: web
-    name: limesurvey-leaderboard
-    env: docker
+    name: medaix-leaderboard
+    env: php
     plan: free
     buildCommand: ""
-    startCommand: php -S 0.0.0.0:10000 -t .
-    envVars:
-      - key: PORT
-        value: 10000
+    startCommand: ""
+    rootDir: .
+    staticPublishPath: .
