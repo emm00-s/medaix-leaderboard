@@ -1,9 +1,7 @@
 services:
   - type: web
     name: medaix-leaderboard
-    env: php
+    env: docker
     plan: free
-    buildCommand: ""
-    startCommand: ""
-    rootDir: .
-    staticPublishPath: .
+    dockerfilePath: Dockerfile
+    healthCheckPath: /leaderboard.php
