@@ -11,13 +11,22 @@
  * • Uses an external configuration file (config.php)
  ******************************************************************/
 
-// 1. INCLUDE CONFIGURATION FILE ------------------------------------------------
+// 1. CONFIGURATION (LOCAL or ENV) ---------------------------------------------
 if (file_exists(__DIR__ . '/config.php')) {
     require_once __DIR__ . '/config.php';
 } else {
-    http_response_code(500);
-    error_log("Critical Error: Configuration file 'config.php' not found.");
-    exit('Server configuration error. Unable to load settings. Please contact the administrator.');
+    define('LIMESURVEY_API_URL', getenv('LIMESURVEY_API_URL'));
+    define('LIMESURVEY_USERNAME', getenv('LIMESURVEY_USERNAME'));
+    define('LIMESURVEY_PASSWORD', getenv('LIMESURVEY_PASSWORD'));
+    define('LIMESURVEY_SURVEY_ID', getenv('LIMESURVEY_SURVEY_ID'));
+
+    define('COLUMN_NICKNAME', getenv('COLUMN_NICKNAME'));
+    define('COLUMN_SCORE', getenv('COLUMN_SCORE'));
+
+    define('LEADERBOARD_TITLE', getenv('LEADERBOARD_TITLE') ?: '🏆 Live Leaderboard');
+    define('SEARCH_PLACEHOLDER', getenv('SEARCH_PLACEHOLDER') ?: 'Search by nickname...');
+    define('NO_RESULTS_MESSAGE', getenv('NO_RESULTS_MESSAGE') ?: 'No nickname found.');
+    define('POINTS_SUFFIX', getenv('POINTS_SUFFIX') ?: 'points');
 }
 
 // 2. VERIFY REQUIRED CONSTANTS --------------------------------------------------
